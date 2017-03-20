@@ -1,20 +1,20 @@
 package com.dotamining.mongo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
 
 public class Match extends DotaObject{
 
-	private List<Player> players;
 	
 	public Match(Document doc){
 		super(doc);
-		players = db().getPlayersForMatch(getMatchID());
+		
 	}
 	
-	public String getMatchID(){
-		return getDoc().getString("match_id");
+	public Integer getMatchID(){
+		return getDoc().getInteger("match_id");
 	}
 	
 	public Boolean radiantWin(){
@@ -30,6 +30,28 @@ public class Match extends DotaObject{
 	}
 	
 	public List<Player> getAllPlayers(){
+		List<Player> players = db().getPlayersForMatch(getMatchID());
 		return players;
 	}
+	
+	public List<Player> getRadiantPlayers(){
+		List<Player> radiant = new ArrayList<>();
+		for(Player player : getAllPlayers()){
+			if(player.getPlayerSlot() < 5){
+				radiant.add(player);
+			}
+		}
+		return radiant;
+	}
+	
+	public List<Player> getDirePlayers(){
+		List<Player> dire = new ArrayList<>();
+		for(Player player : getAllPlayers()){
+			if(player.getPlayerSlot() >= 5){
+				dire.add(player);
+			}
+		}
+		return dire;
+	}
+	
 }

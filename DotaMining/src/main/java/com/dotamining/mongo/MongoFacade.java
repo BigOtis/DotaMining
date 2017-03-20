@@ -3,21 +3,18 @@ package com.dotamining.mongo;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bson.Document;
 
+import com.dotamining.mongo.model.Match;
 import com.dotamining.mongo.model.Player;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 /**
- * Simple interface that abstracts calls to 
- * the US Congress Mongo database
+ * Simple interface that abstracts calls to the Dota MongoDB
  * 
  * @author Phillip Lopez - pgl5711@rit.edu
  *
@@ -60,8 +57,17 @@ public class MongoFacade {
 	public static MongoFacade getInstance(){
 		return instance;
 	}
+	
+	public List<Match> getMatches(){
+		
+		List<Match> matchList = new ArrayList<>();
+		for(Document matchDoc : matches.find()){
+			matchList.add(new Match(matchDoc));
+		}
+		return matchList;
+	}
 
-	public List<Player> getPlayersForMatch(String match_id){
+	public List<Player> getPlayersForMatch(Integer match_id){
 		
 		List<Player> playerList = new ArrayList<>();
 		Document query = new Document("match_id", match_id);
