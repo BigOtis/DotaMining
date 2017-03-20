@@ -10,7 +10,6 @@ public class Match extends DotaObject{
 	
 	public Match(Document doc){
 		super(doc);
-		
 	}
 	
 	public Integer getMatchID(){
@@ -53,5 +52,4 @@ public class Match extends DotaObject{
 		}
 		return dire;
 	}
-	
 }

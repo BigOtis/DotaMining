@@ -2,7 +2,7 @@ package cs721.DotaMining;
 
 import java.util.List;
 
-import com.dotamining.mongo.MongoFacade;
+import com.dotamining.mongo.DotaMongoFacade;
 import com.dotamining.mongo.model.Match;
 import com.dotamining.mongo.model.Player;
 
@@ -37,29 +37,37 @@ public class ModelTest
     /**
      * Rigourous Test :-)
      */
-    public void testMongoFacade()
-    {
-       MongoFacade facade = MongoFacade.getInstance();
-       List<Match> matches = facade.getMatches();
-       long direGold = 0;
-       long radiantGold = 0;
-       int matchCount = 0;
+    public void testMongoFacade(){
+    	
+    	// Setup the MongoFacade which connects to the DB
+    	DotaMongoFacade facade = DotaMongoFacade.getInstance();
+    	
+    	// Load in all 50,000 matches from our data set
+    	List<Match> matches = facade.getMatches();
+    	
+    	// Keep track of gold
+    	long direGold = 0;
+       	long radiantGold = 0;
+       	int matchCount = 0;
        
-       for(Match match : matches){
-    	   if((matchCount % 1000) == 0){
-    		   System.out.println("Reached match #: " + matchCount);
-    	   }
-    	   for(Player player : match.getRadiantPlayers()){
-    		   radiantGold += player.getGoldPerMin();
-    	   }
-    	   for(Player player : match.getDirePlayers()){
-    		   direGold += player.getGoldPerMin();
-    	   }  
-    	   matchCount++;
-       } 
+       	// Loop through every match and player
+       	// and count the gold collected per player
+       	for(Match match : matches){
+       		if((matchCount % 1000) == 0){
+       			System.out.println("Reached match #: " + matchCount);
+       		}
+       		for(Player player : match.getRadiantPlayers()){
+       			radiantGold += player.getGoldPerMin();
+       		}
+       		for(Player player : match.getDirePlayers()){
+       			direGold += player.getGoldPerMin();
+       		}  
+       		matchCount++;
+       	} 
        
-       System.out.println("Average dire gold: " + direGold/(matchCount*10));
-       System.out.println("Average radiant gold: " + radiantGold/(matchCount*10));
-       System.out.println("Over " + matchCount + " matches");
+       	// Print out the average gold for each side across all matches
+       	System.out.println("Average dire gold: " + direGold/(matchCount*10));
+       	System.out.println("Average radiant gold: " + radiantGold/(matchCount*10));
+       	System.out.println("Over " + matchCount + " matches");
     }
 }
