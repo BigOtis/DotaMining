@@ -37,6 +37,59 @@ public class ModelTest
     /**
      * Rigourous Test :-)
      */
+    public void testWinnerGold(){
+    	
+    	// Setup the MongoFacade which connects to the DB
+    	DotaMongoFacade facade = DotaMongoFacade.getInstance();
+    	
+    	// Load in all 50,000 matches from our data set
+    	List<Match> matches = facade.getMatches();
+    	
+    	// Keep track of gold
+    	long winnerGold = 0;
+       	long loserGold = 0;
+       	int numWinners = 0;
+       	int numLosers = 0;
+       	int matchCount = 0;
+       
+       	// Loop through every match and player
+       	// and count the gold collected per player
+       	for(Match match : matches){
+       		if((matchCount % 1000) == 0){
+       			System.out.println("Reached match #: " + matchCount);
+       		}
+       		for(Player player : match.getRadiantPlayers()){
+       			if(match.radiantWin()){
+       				winnerGold += player.getGoldPerMin();
+       				numWinners++;
+       			}
+       			else{
+           			loserGold += player.getGoldPerMin();
+           			numLosers++;
+       			}
+       		}
+       		for(Player player : match.getDirePlayers()){
+       			if(!match.radiantWin()){
+       				winnerGold += player.getGoldPerMin();
+       				numWinners++;
+       			}
+       			else{
+           			loserGold += player.getGoldPerMin();
+           			numLosers++;
+       			}
+       		}  
+       		matchCount++;
+       	} 
+       
+       	// Print out the average gold for each side across all matches
+       	System.out.println("Average winner gold: " + winnerGold/numWinners);
+       	System.out.println("Average loser gold: " + loserGold/numLosers);
+       	System.out.println("Over " + matchCount + " matches");
+    }
+    
+    /**
+     * Rigourous Test :-)
+     */
     public void testMongoFacade(){
     	
     	// Setup the MongoFacade which connects to the DB
