@@ -69,7 +69,7 @@ public class TextTest extends TestCase
     			map = loserCount;
     		}
     		for(String word : words){
-    			if(word.length() > 1){
+    			if(word.length() > 5){
 	    			wordCount++;
 	    			if(wordCount % 100000 == 0){
 	    				System.out.println("At " + wordCount + "th word");

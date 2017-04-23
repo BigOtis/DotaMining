@@ -73,5 +73,8 @@ public class Player extends DotaObject{
 		return getDoc().getInteger("xp_per_min");
 	}
 	
+	public Boolean isWinner(){
+		return getDoc().getBoolean("won");
+	}
 	
 }
