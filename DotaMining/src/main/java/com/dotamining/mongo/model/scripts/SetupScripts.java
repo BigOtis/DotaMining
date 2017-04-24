@@ -14,5 +14,4 @@ public class SetupScripts {
 		AddWinnersToChat.main(new String[]{});
 		AddWinnersToPlayers.main(new String[]{});
 	}
-	
 }
