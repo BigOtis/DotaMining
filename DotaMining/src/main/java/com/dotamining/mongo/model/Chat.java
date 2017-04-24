@@ -53,6 +53,18 @@ public class Chat extends DotaObject{
 		return getDoc().getInteger("slot");
 	}
 	
+	public Double getTime(){
+		return getDoc().getDouble("time");
+	}
+	
+	public Integer getTimeInteger(){
+		Object time = getDoc().get("time");
+		if(time instanceof Integer){
+			return (Integer) time;
+		}
+		return null;
+	}
+	
 	/**
 	 * Was the player on the Radiant team? 
 	 * If not, then they were dire

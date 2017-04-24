@@ -13,5 +13,6 @@ public class SetupScripts {
 		ReplaceRadiantWin.main(new String[]{});
 		AddWinnersToChat.main(new String[]{});
 		AddWinnersToPlayers.main(new String[]{});
+		NormalizeChatTime.main(new String[]{});
 	}
 }
