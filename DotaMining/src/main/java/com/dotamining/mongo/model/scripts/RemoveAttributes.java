@@ -47,6 +47,7 @@ public class RemoveAttributes {
 				"item_4",
 				"item_5",
 				"tower_damage",
+				"unit_order_buyback",
 				"unit_order_attack_move",
 				"unit_order_attack_target",
 				"unit_order_cast_no_target",
