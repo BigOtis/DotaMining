@@ -28,9 +28,7 @@ public class Subset {
 		try {
 			br = new BufferedReader(new FileReader(path));
 			
-			fw = new FileWriter("/home/mmbohari/Desktop/Link to Spring 2017"
-					+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-					+ "/Subset/Match.csv");
+			fw = new FileWriter("Sub_Match.csv");
 			bw = new BufferedWriter(fw);
 			
 			line = br.readLine();
@@ -87,9 +85,7 @@ public class Subset {
 		try {
 			br = new BufferedReader(new FileReader(path));
 			
-			fw = new FileWriter("/home/mmbohari/Desktop/Link to Spring 2017"
-					+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-					+ "/Subset/Players.csv");
+			fw = new FileWriter("Sub_Players.csv");
 			bw = new BufferedWriter(fw);
 			
 			line = br.readLine();
@@ -146,9 +142,7 @@ public class Subset {
 		try {
 			br = new BufferedReader(new FileReader(path));
 			
-			fw = new FileWriter("/home/mmbohari/Desktop/Link to Spring 2017"
-					+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-					+ "/Subset/Chat.csv");
+			fw = new FileWriter("Sub_Chat.csv");
 			bw = new BufferedWriter(fw);
 			
 			line = br.readLine();
@@ -207,19 +201,13 @@ public class Subset {
 		Subset obj = new Subset();
 		
 		// Create a subset of Match.csv
-		obj.createSubsetMatch("/home/mmbohari/Desktop/Link to Spring 2017"
-				+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-				+ "/Processed Datase v1/Match.csv");
+		obj.createSubsetMatch("Match.csv");
 		
 		// Create a subset of Player.csv
-		obj.createSubsetPlayer("/home/mmbohari/Desktop/Link to Spring 2017"
-				+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-				+ "/Processed Datase v1/Players.csv");
+		obj.createSubsetPlayer("Players.csv");
 		
 		// Create a subset of Chat.csv
-		obj.createSubsetChat("/home/mmbohari/Desktop/Link to Spring 2017"
-				+ "/Data Cleaning & Preparation/Term Project/Phase 3"
-				+ "/Processed Datase v1/Chat.csv");
+		obj.createSubsetChat("Chat.csv");
 	}
 
 }

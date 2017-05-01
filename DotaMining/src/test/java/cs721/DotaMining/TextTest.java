@@ -52,6 +52,8 @@ public class TextTest extends TestCase
     	
     	Map<String, Integer> loserCount = new HashMap<>();
     	Map<String, Integer> winnerCount = new HashMap<>();
+    	Map<String, Integer> loserCountEnd = new HashMap<>();
+    	Map<String, Integer> winnerCountEnd = new HashMap<>();
     	Long wordCount = 0L;
     	
     	// Loop through every chat message
@@ -63,13 +65,25 @@ public class TextTest extends TestCase
     		
     		// Add the words from this message to the winner/loser wordmap
     		if(message.isWinner()){
-    			map = winnerCount;
+    			if(message.getTime() < .9){
+        			map = winnerCount;
+
+    			}
+    			else{
+    				map = winnerCountEnd;
+    			}
     		}
     		else{
-    			map = loserCount;
+    			if(message.getTime() < .9){
+        			map = loserCount;
+
+    			}
+    			else{
+    				map = loserCountEnd;
+    			}
     		}
     		for(String word : words){
-    			if(word.length() > 5){
+    			if(word.length() > 4){
 	    			wordCount++;
 	    			if(wordCount % 100000 == 0){
 	    				System.out.println("At " + wordCount + "th word");
@@ -88,13 +102,18 @@ public class TextTest extends TestCase
     	// Sort the words based on the number of times they appear
     	List<String> winnerWords = new ArrayList<>(winnerCount.keySet());
     	List<String> loserWords = new ArrayList<>(loserCount.keySet());
+    	List<String> winnerWordsEnd = new ArrayList<>(winnerCountEnd.keySet());
+    	List<String> loserWordsEnd = new ArrayList<>(loserCountEnd.keySet());
     	
     	CompareWordCount radiantCompare = new CompareWordCount(winnerCount);
     	CompareWordCount direCompare = new CompareWordCount(loserCount);
+    	CompareWordCount radiantCompareEnd = new CompareWordCount(winnerCountEnd);
+    	CompareWordCount direCompareEnd = new CompareWordCount(loserCountEnd);
     	
     	Collections.sort(winnerWords, radiantCompare);
     	Collections.sort(loserWords, direCompare);
-    	
+    	Collections.sort(winnerWordsEnd, radiantCompareEnd);
+    	Collections.sort(loserWordsEnd, direCompareEnd);
     	// output the top words
 		System.out.println("Top Winner Words: ");
     	for(int i = 0; i < NUM_TOP_WORDS; i++){
@@ -106,6 +125,19 @@ public class TextTest extends TestCase
     	for(int i = 0; i < NUM_TOP_WORDS; i++){
     		String word = loserWords.get(i);
     		System.out.println(word + "\t - " + loserCount.get(word));    		
+    	}
+    	
+    	// output the top words
+		System.out.println("Top End Winner Words: ");
+    	for(int i = 0; i < NUM_TOP_WORDS; i++){
+    		String word = winnerWordsEnd.get(i);
+    		System.out.println(word + "\t - " + winnerCountEnd.get(word));
+    	}
+    	
+		System.out.println("Top End Loser Words: ");
+    	for(int i = 0; i < NUM_TOP_WORDS; i++){
+    		String word = loserWordsEnd.get(i);
+    		System.out.println(word + "\t - " + loserCountEnd.get(word));    		
     	}
     }
     
