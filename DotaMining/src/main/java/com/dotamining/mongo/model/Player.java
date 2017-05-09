@@ -2,6 +2,11 @@ package com.dotamining.mongo.model;
 
 import org.bson.Document;
 
+/**
+ * Simple player object
+ * @author pgl57
+ *
+ */
 public class Player extends DotaObject{
 
 	public Player(Document doc) {

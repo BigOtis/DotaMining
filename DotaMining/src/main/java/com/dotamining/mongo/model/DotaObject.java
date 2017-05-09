@@ -7,7 +7,7 @@ import com.dotamining.mongo.DotaMongoFacade;
 /**
  * Abstract class for objects that wrap the Dota MongoDB BSON objects
  * 
- * @author Phillip Lopez - pgl5711@rit.edu
+\* @author Phillip Lopez - pgl5711@rit.edu - Imran Bohari - iib8085@rit.edu
  */
 public abstract class DotaObject {
 

@@ -1,5 +1,7 @@
 package cs721.DotaMining;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,8 +46,13 @@ public class TextTest extends TestCase
 
     /**
      * Rigourous Test :-)
+     * @throws FileNotFoundException 
      */
-    public void testMongoFacade(){
+    public void testMongoFacade() throws FileNotFoundException{
+    	
+    	PrintWriter wpw = new PrintWriter("winnerWords.txt");
+    	PrintWriter lpw = new PrintWriter("loserWords.txt");
+
     	
     	// Setup the MongoFacade which connects to the DB
     	DotaMongoFacade facade = DotaMongoFacade.getInstance();

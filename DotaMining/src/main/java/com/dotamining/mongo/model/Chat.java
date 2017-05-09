@@ -5,7 +5,7 @@ import org.bson.Document;
 /**
  * A single chat comment that occurred during a Dota 2 match
  * 
- * @author Phillip Lopez - pgl5711@rit.edu
+\* @author Phillip Lopez - pgl5711@rit.edu - Imran Bohari - iib8085@rit.edu
  */
 public class Chat extends DotaObject{
 

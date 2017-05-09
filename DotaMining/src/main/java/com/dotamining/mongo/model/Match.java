@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.bson.Document;
 
+/**
+ * Simple match object
+ * @author pgl57
+ *
+ */
 public class Match extends DotaObject{
 
 	

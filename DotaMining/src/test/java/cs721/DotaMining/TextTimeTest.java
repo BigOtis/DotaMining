@@ -1,5 +1,7 @@
 package cs721.DotaMining;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,8 +46,12 @@ public class TextTimeTest extends TestCase
 
     /**
      * Rigourous Test :-)
+     * @throws FileNotFoundException 
      */
-    public void testMongoFacade(){
+    public void testMongoFacade() throws FileNotFoundException{
+    	
+    	PrintWriter wpw = new PrintWriter("winnerWords.txt");
+    	PrintWriter lpw = new PrintWriter("loserWords.txt");
     	
     	// Setup the MongoFacade which connects to the DB
     	DotaMongoFacade facade = DotaMongoFacade.getInstance();
@@ -55,7 +61,7 @@ public class TextTimeTest extends TestCase
     	Long wordCount = 0L;
     	
     	// Loop through every chat message
-    	for(Document chatDoc : facade.chat.find()){
+    	for(Document chatDoc : facade.chat.find().limit(10000)){
     		
     		Chat message = new Chat(chatDoc);
     		Map<String, Integer> map;
@@ -69,7 +75,15 @@ public class TextTimeTest extends TestCase
     			map = loserCount;
     		}
     		for(String word : words){
-    			if(word.length() > 5){
+    			if(word.length() > 1){
+    				
+    				if(message.isWinner()){
+    					wpw.println(word);
+    				}
+    				else{
+    					lpw.println(word);
+    				}
+    				
 	    			wordCount++;
 	    			if(wordCount % 100000 == 0){
 	    				System.out.println("At " + wordCount + "th word");
@@ -107,6 +121,11 @@ public class TextTimeTest extends TestCase
     		String word = loserWords.get(i);
     		System.out.println(word + "\t - " + loserCount.get(word));    		
     	}
+    	
+    	wpw.flush();
+    	lpw.flush();
+    	wpw.close();
+    	lpw.close();
     }
     
     /**

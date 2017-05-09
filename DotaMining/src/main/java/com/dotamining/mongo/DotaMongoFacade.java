@@ -17,7 +17,7 @@ import com.mongodb.client.MongoDatabase;
 /**
  * Simple interface that abstracts calls to the Dota MongoDB
  * 
- * @author Phillip Lopez - pgl5711@rit.edu
+\* @author Phillip Lopez - pgl5711@rit.edu - Imran Bohari - iib8085@rit.edu
  *
  */
 public class DotaMongoFacade {
